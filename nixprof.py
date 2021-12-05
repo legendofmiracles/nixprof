@@ -102,7 +102,7 @@ def report(input: TextIO, tred, print_crit_path, print_avg_crit, print_sim_times
                     g.nodes[drv]["stop"] = time
                     g.nodes[drv]["time"] = time - g.nodes[drv]["start"]
 
-    drv_data = json.loads(subprocess.run(["nix", "--experimental-features", "nix-command", "path-info", "--json", "--derivation"] + list(g), capture_output=True, check=True).stdout)
+    drv_data = json.loads(subprocess.run(["nix", "path-info", "--json", "--derivation"] + list(g), capture_output=True, check=True).stdout)
     for d in drv_data:
         for dep in d["references"]:
             if dep in g:
